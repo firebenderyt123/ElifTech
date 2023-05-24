@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import Container from "@mui/material/Container";
 
 export default function Document() {
   return (
@@ -10,7 +11,9 @@ export default function Document() {
         />
       </Head>
       <body>
-        <Main />
+        <Container>
+          <Main />
+        </Container>
         <NextScript />
       </body>
     </Html>
