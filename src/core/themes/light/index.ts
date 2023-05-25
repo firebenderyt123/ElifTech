@@ -1,45 +1,51 @@
+import { CustomPaletteOptions } from "../../interfaces/CustomPalette";
 import { createTheme } from "@mui/material/styles";
 
 const lightTheme = createTheme({
   palette: {
+    mode: "light",
     background: {
       default: "#e8ebf2",
-    },
-    primary: {
-      main: "#48a0d1",
+      secondary: "#ffffff",
     },
   },
   typography: {
-    fontFamily: "'Roboto'",
+    fontFamily: "'Roboto', sans-serif",
     h1: {
       fontSize: "2.5rem",
       lineHeight: "3.25rem",
       fontWeight: 400,
+      fontFamily: "'Roboto', sans-serif",
     },
     h2: {
       fontSize: "2rem",
       lineHeight: "2.5rem",
       fontWeight: 400,
+      fontFamily: "'Roboto', sans-serif",
     },
     h3: {
       fontSize: "1.75rem",
       lineHeight: "2.25rem",
       fontWeight: 400,
+      fontFamily: "'Roboto', sans-serif",
     },
     h4: {
       fontSize: "1.5rem",
       lineHeight: "2rem",
       fontWeight: 400,
+      fontFamily: "'Roboto', sans-serif",
     },
     h5: {
       fontSize: "1.25rem",
       lineHeight: "1.75rem",
       fontWeight: 400,
+      fontFamily: "'Roboto', sans-serif",
     },
     h6: {
       fontSize: "1rem",
       lineHeight: "1.5rem",
       fontWeight: 400,
+      fontFamily: "'Roboto', sans-serif",
     },
   },
   spacing: [
@@ -56,11 +62,7 @@ const lightTheme = createTheme({
     "5rem",
     "5.5rem",
     "6rem",
-    "6.5rem",
-    "7rem",
-    "7.5rem",
-    "8rem",
   ],
-});
+} as CustomPaletteOptions);
 
 export default lightTheme;
