@@ -21,7 +21,7 @@ export default function ProductListBlock(): JSX.Element {
   const error = useAppSelector(selectProductListError);
 
   useEffect(() => {
-    dispatch(getProductList());
+    dispatch(getProductList({ limit: 12, page: 1 }));
   }, [dispatch]);
 
   const productListElem = !isLoading && productList && (

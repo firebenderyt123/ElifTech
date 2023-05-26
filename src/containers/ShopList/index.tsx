@@ -1,16 +1,17 @@
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { getShopList } from "../../core/services/shopList";
+import { getProductList } from "../../core/services/productList";
 import {
   selectShopList,
   selectShopListError,
   selectShopListIsLoading,
 } from "../../core/store/selectors/shopList";
-import { Shop } from "../../core/types/Shop";
+import CheckmarkSelect from "../../components/CheckmarkSelect";
 import Spinner from "../../components/Spinner";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import Alert from "@mui/material/Alert";
-import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
@@ -24,14 +25,21 @@ export default function Sidebar(): JSX.Element {
     dispatch(getShopList());
   }, [dispatch]);
 
+  const shopOnClickHandler = useCallback(
+    (shopIds) => {
+      dispatch(getProductList({ limit: 12, page: 1, shopIds: shopIds }));
+    },
+    [dispatch]
+  );
+
   const shopListElem = !isLoading && shopList.length > 0 && (
-    <React.Fragment>
-      {shopList.map((shop: Shop) => (
-        <Grid item key={shop._id}>
-          <Button variant="outlined">{shop.name}</Button>
-        </Grid>
-      ))}
-    </React.Fragment>
+    <Box maxWidth="100%">
+      <CheckmarkSelect
+        label="Shop"
+        itemList={shopList}
+        onClose={shopOnClickHandler}
+      />
+    </Box>
   );
   const loaderElem = isLoading && <Spinner size={50} />;
   const errorElem = !isLoading && error && (
@@ -41,7 +49,7 @@ export default function Sidebar(): JSX.Element {
   return (
     <Grid container flexDirection="column" alignItems="center" rowSpacing={2}>
       <Grid item>
-        <Typography component="h3">Shops:</Typography>
+        <Typography component="h3">Filters</Typography>
       </Grid>
       <Grid
         container

@@ -11,7 +11,7 @@ export default function HomePage(): JSX.Element {
           <ShopList />
         </Sidebar>
       </Grid>
-      <Grid item xs={12} sm={9}>
+      <Grid item xs={12} sm={9} mb="1rem">
         <ProductListBlock />
       </Grid>
     </Grid>

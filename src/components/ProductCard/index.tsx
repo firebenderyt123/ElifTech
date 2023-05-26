@@ -18,10 +18,10 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Image from "next/image";
 import Link from "next/link";
 
-type ProductCardProps = {
+interface ProductCardProps {
   product: Product;
   [key: string]: any;
-};
+}
 
 function ProductCard({ product, ...rest }: ProductCardProps): JSX.Element {
   const { id, name, shop, photo, description, price, currency } = product;

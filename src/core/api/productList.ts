@@ -11,8 +11,12 @@ type ResponseProducts = {
 
 export const getProductList = async (
   limit: number,
-  page: number
+  page: number,
+  shopIds?: number[]
 ): Promise<ProductList> => {
+  const match =
+    shopIds && shopIds.length > 0 ? { "shop.id": { $in: shopIds } } : {};
+
   const data = JSON.stringify({
     collection: "products",
     database: "delivery",
@@ -30,7 +34,7 @@ export const getProductList = async (
         $unwind: "$shop",
       },
       {
-        $match: {},
+        $match: match,
       },
       {
         $limit: limit,
