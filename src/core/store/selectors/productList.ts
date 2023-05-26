@@ -1,7 +1,8 @@
 import { RootState } from "../";
 
 export const selectProductListIsLoading = (state: RootState) =>
-  state.product.isLoading;
+  state.productList.isLoading;
 export const selectProductList = (state: RootState) =>
   state.productList.productList;
-export const selectProductListError = (state: RootState) => state.product.error;
+export const selectProductListError = (state: RootState) =>
+  state.productList.error;

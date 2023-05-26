@@ -8,7 +8,6 @@ export default function HeaderBlock(): JSX.Element {
       borderRadius={0}
       position="sticky"
       top={0}
-      boxShadow="0px -15px 20px 0px"
       zIndex={10000000}
       mb={4}>
       <Container>

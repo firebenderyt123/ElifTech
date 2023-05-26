@@ -9,11 +9,12 @@ import {
 } from "../../core/store/selectors/cart";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
-import React, { useCallback, useRef } from "react";
+import React, { useCallback } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -23,18 +24,15 @@ type ProductCardProps = {
 };
 
 function ProductCard({ product, ...rest }: ProductCardProps): JSX.Element {
-  const { id, name, photo, description, price, currency } = product;
-  const buttonRef = useRef(null);
+  const { id, name, shop, photo, description, price, currency } = product;
   const dispatch = useAppDispatch();
-  const cartItems = useAppSelector(selectCartItems);
-  const totalQuantity = useAppSelector(selectCartTotalQuantity);
-  const totaPrice = useAppSelector(selectCartTotalPrice);
+  // const cartItems = useAppSelector(selectCartItems);
+  // const totalQuantity = useAppSelector(selectCartTotalQuantity);
+  // const totaPrice = useAppSelector(selectCartTotalPrice);
 
   const addToCartHandler = useCallback(() => {
     dispatch(addToCart(product, 1));
   }, [dispatch, product]);
-
-  console.log(cartItems, totalQuantity, totaPrice);
 
   return (
     <EmptyCard {...rest}>
@@ -49,8 +47,15 @@ function ProductCard({ product, ...rest }: ProductCardProps): JSX.Element {
           />
         </Box>
       </Link>
-      <Box sx={{ p: 2 }}>
-        <Typography component="h3">{name}</Typography>
+      <Box sx={{ px: 2, pb: 2 }}>
+        <Grid container alignItems="center" justifyContent="space-between">
+          <Grid item>
+            <Typography component="h3">{name}</Typography>
+          </Grid>
+          <Grid item>
+            <Button href={`/shop/${shop.id}`}>{shop.name}</Button>
+          </Grid>
+        </Grid>
         <Typography component="p">
           {description.slice(0, 50) + "..."}
         </Typography>
@@ -65,8 +70,8 @@ function ProductCard({ product, ...rest }: ProductCardProps): JSX.Element {
             )} ${currency}`}</Typography>
           </Grid>
           <Grid item>
-            <Button ref={buttonRef} onClick={addToCartHandler}>
-              Add to cart
+            <Button onClick={addToCartHandler} variant="contained">
+              <ShoppingCartRoundedIcon />
             </Button>
           </Grid>
         </Grid>

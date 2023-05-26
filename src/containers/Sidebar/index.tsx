@@ -1,11 +1,44 @@
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { getShopList } from "../../core/services/shopList";
+import {
+  selectShopList,
+  selectShopListError,
+  selectShopListIsLoading,
+} from "../../core/store/selectors/shopList";
+import { Shop } from "../../core/types/Shop";
+import Spinner from "../../components/Spinner";
 import StyledBox from "../../components/StyledBox";
+
+import React, { useEffect } from "react";
+import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
-const shops: string[] = ["Shop 1", "Shop 2", "Shop 3"];
-
 export default function Sidebar(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const shopList = useAppSelector(selectShopList);
+  const isLoading = useAppSelector(selectShopListIsLoading);
+  const error = useAppSelector(selectShopListError);
+
+  useEffect(() => {
+    dispatch(getShopList());
+  }, [dispatch]);
+
+  const shopListElem = !isLoading && shopList.length > 0 && (
+    <React.Fragment>
+      {shopList.map((shop: Shop) => (
+        <Grid item key={shop._id}>
+          <Button variant="outlined">{shop.name}</Button>
+        </Grid>
+      ))}
+    </React.Fragment>
+  );
+  const loaderElem = isLoading && <Spinner size={50} />;
+  const errorElem = !isLoading && error && (
+    <Alert severity="error">{error}</Alert>
+  );
+
   return (
     <StyledBox>
       <Grid container flexDirection="column" alignItems="center" rowSpacing={2}>
@@ -17,12 +50,12 @@ export default function Sidebar(): JSX.Element {
           item
           flexDirection="column"
           alignItems="center"
-          rowSpacing={1}>
-          {shops.map((shop) => (
-            <Grid item key={shop}>
-              <Button variant="outlined">{shop}</Button>
-            </Grid>
-          ))}
+          rowSpacing={1}
+          position="relative"
+          minHeight="300px">
+          {shopListElem}
+          {loaderElem}
+          {errorElem}
         </Grid>
       </Grid>
     </StyledBox>

@@ -17,21 +17,43 @@ export const getProductList = async (
     collection: "products",
     database: "delivery",
     dataSource: "Cluster0",
-    filter: {},
-    projection: {
-      id: 1,
-      photo: 1,
-      name: 1,
-      description: 1,
-      price: 1,
-      currency: 1,
-    },
-    limit: limit,
-    skip: (page - 1) * limit,
+    pipeline: [
+      {
+        $lookup: {
+          from: "shops",
+          localField: "shopId",
+          foreignField: "id",
+          as: "shop",
+        },
+      },
+      {
+        $unwind: "$shop",
+      },
+      {
+        $match: {},
+      },
+      {
+        $limit: limit,
+      },
+      {
+        $skip: (page - 1) * limit,
+      },
+      {
+        $project: {
+          id: 1,
+          photo: 1,
+          name: 1,
+          description: 1,
+          shop: { id: "$shop.id", name: "$shop.name" },
+          price: 1,
+          currency: 1,
+        },
+      },
+    ],
   });
   const config = {
     method: "post",
-    url: `${actionUrl}/find`,
+    url: `${actionUrl}/aggregate`,
     headers: headers,
     data: data,
   };

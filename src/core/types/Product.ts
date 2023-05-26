@@ -1,9 +1,11 @@
+import { Shop } from "./Shop";
+
 export type Product = {
   _id: string;
   id: number;
   photo: string;
   name: string;
-  shop: string;
+  shop: Shop;
   description: string;
   price: number;
   currency: string;

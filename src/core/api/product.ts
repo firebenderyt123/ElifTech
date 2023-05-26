@@ -13,17 +13,37 @@ export const getProduct = async (productId: number): Promise<Product> => {
     collection: "products",
     database: "delivery",
     dataSource: "Cluster0",
-    filter: { id: productId },
-    projection: {
-      id: 1,
-      photo: 1,
-      name: 1,
-      price: 1,
-    },
+    pipeline: [
+      {
+        $lookup: {
+          from: "shops",
+          localField: "shopId",
+          foreignField: "id",
+          as: "shop",
+        },
+      },
+      {
+        $unwind: "$shop",
+      },
+      {
+        $match: { id: productId },
+      },
+      {
+        $project: {
+          id: 1,
+          photo: 1,
+          name: 1,
+          description: 1,
+          shop: { id: "$shop.id", name: "$shop.name" },
+          price: 1,
+          currency: 1,
+        },
+      },
+    ],
   });
   const config = {
     method: "post",
-    url: `${actionUrl}/findOne`,
+    url: `${actionUrl}/aggregate`,
     headers: headers,
     data: data,
   };
