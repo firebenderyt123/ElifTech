@@ -14,7 +14,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -71,7 +71,7 @@ function ProductCard({ product, ...rest }: ProductCardProps): JSX.Element {
           </Grid>
           <Grid item>
             <Button onClick={addToCartHandler} variant="contained">
-              <ShoppingCartRoundedIcon />
+              <ShoppingCartOutlinedIcon />
             </Button>
           </Grid>
         </Grid>
