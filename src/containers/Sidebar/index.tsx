@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 
 const shops: string[] = ["Shop 1", "Shop 2", "Shop 3"];
 
-export default function Sidebar() {
+export default function Sidebar(): JSX.Element {
   return (
     <StyledBox>
       <Grid

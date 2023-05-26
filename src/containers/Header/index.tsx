@@ -2,7 +2,7 @@ import StyledBox from "../../components/StyledBox";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 
-export default function HeaderBlock() {
+export default function HeaderBlock(): JSX.Element {
   return (
     <StyledBox
       borderRadius={0}

@@ -1,4 +1,4 @@
-import { CustomPaletteOptions } from "../../interfaces/CustomPalette";
+import { CustomPaletteOptions } from "./CustomPalette";
 import { createTheme } from "@mui/material/styles";
 
 const lightTheme = createTheme({

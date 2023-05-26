@@ -1,6 +1,6 @@
 import { Html, Head, Main, NextScript } from "next/document";
 
-export default function Document() {
+export default function Document(): JSX.Element {
   return (
     <Html lang="en">
       <Head>
@@ -15,14 +15,4 @@ export default function Document() {
       </body>
     </Html>
   );
-}
-
-declare global {
-  // eslint-disable-next-line no-unused-vars
-  namespace JSX {
-    // eslint-disable-next-line no-unused-vars
-    interface IntrinsicElements {
-      [elemName: string]: any;
-    }
-  }
 }
