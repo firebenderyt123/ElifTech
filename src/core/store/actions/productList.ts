@@ -3,7 +3,7 @@ import {
   GET_PRODUCT_LIST_SUCCESS,
   GET_PRODUCT_LIST_ERROR,
 } from "../constants/productList";
-import { Product } from "../../models/Product";
+import { ProductList } from "../../types/ProductList";
 
 interface GetProductListRequestAction {
   type: typeof GET_PRODUCT_LIST_REQUEST;
@@ -11,7 +11,7 @@ interface GetProductListRequestAction {
 
 interface GetProductListSuccessAction {
   type: typeof GET_PRODUCT_LIST_SUCCESS;
-  productList: Product[];
+  productList: ProductList;
 }
 
 interface GetProductListErrorAction {
@@ -29,7 +29,7 @@ export const getProductListRequest = (): GetProductListRequestAction => ({
 });
 
 export const getProductListSuccess = (
-  productList: Product[]
+  productList: ProductList
 ): GetProductListSuccessAction => ({
   type: GET_PRODUCT_LIST_SUCCESS,
   productList,

@@ -4,11 +4,11 @@ import {
   GET_PRODUCT_LIST_ERROR,
 } from "../constants/productList";
 import { ProductListActions } from "../actions/productList";
-import { Product } from "../../models/Product";
+import { ProductList } from "../../types/ProductList";
 
 interface ProductListInterface {
   isLoading: boolean;
-  productList: Product[] | null;
+  productList: ProductList | null;
   error: string | null;
 }
 

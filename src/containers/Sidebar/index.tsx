@@ -8,12 +8,7 @@ const shops: string[] = ["Shop 1", "Shop 2", "Shop 3"];
 export default function Sidebar(): JSX.Element {
   return (
     <StyledBox>
-      <Grid
-        container
-        flexDirection="column"
-        alignItems="center"
-        rowSpacing={2}
-        order={2}>
+      <Grid container flexDirection="column" alignItems="center" rowSpacing={2}>
         <Grid item>
           <Typography component="h3">Shops:</Typography>
         </Grid>

@@ -1,4 +1,4 @@
-import { Product } from "../models/Product";
+import { Product } from "../types/Product";
 import { getProduct as fetchProduct } from "../api/product";
 import {
   GET_PRODUCT_REQUEST,

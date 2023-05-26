@@ -3,7 +3,7 @@ import {
   GET_PRODUCT_SUCCESS,
   GET_PRODUCT_ERROR,
 } from "../constants/product";
-import { Product } from "../../models/Product";
+import { Product } from "../../types/Product";
 
 interface GetProductRequestAction {
   type: typeof GET_PRODUCT_REQUEST;

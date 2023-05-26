@@ -1,12 +1,12 @@
 import { actionUrl, headers } from "../config/mongodb";
-import { Product } from "../models/Product";
+import { Product } from "../types/Product";
 import axios from "axios";
 
-interface ResponseProduct {
+type ResponseProduct = {
   data: {
     document: Product;
   };
-}
+};
 
 export const getProduct = async (productId: number): Promise<Product> => {
   const data = JSON.stringify({

@@ -4,7 +4,7 @@ import {
   GET_PRODUCT_ERROR,
 } from "../constants/product";
 import { ProductActions } from "../actions/product";
-import { Product } from "../../models/Product";
+import { Product } from "../../types/Product";
 
 interface ProductInterface {
   isLoading: boolean;

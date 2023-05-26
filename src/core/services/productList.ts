@@ -1,4 +1,4 @@
-import { Product } from "../models/Product";
+import { ProductList } from "../types/ProductList";
 import { getProductList as fetchProductList } from "../api/productList";
 import {
   GET_PRODUCT_LIST_REQUEST,
@@ -7,12 +7,12 @@ import {
 } from "../store/constants/productList";
 import { AppDispatch } from "../store";
 
-export const getProductList = (limit: number = 20) => {
+export const getProductList = (limit: number = 20, page: number = 1) => {
   return async (dispatch: AppDispatch) => {
     dispatch({ type: GET_PRODUCT_LIST_REQUEST });
 
     try {
-      const productList: Product[] = await fetchProductList(limit);
+      const productList: ProductList = await fetchProductList(limit, page);
       dispatch({ type: GET_PRODUCT_LIST_SUCCESS, productList });
     } catch (error: any) {
       dispatch({
