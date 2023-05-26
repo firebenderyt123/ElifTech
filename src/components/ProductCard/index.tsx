@@ -1,8 +1,15 @@
 import EmptyCard from "./EmptyCard";
 import { Product } from "../../core/types/Product";
 import defaultImage from "../../assets/images/default.png";
+import { addToCart } from "../../core/services/cart";
+import {
+  selectCartItems,
+  selectCartTotalQuantity,
+  selectCartTotalPrice,
+} from "../../core/store/selectors/cart";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
-import React from "react";
+import React, { useCallback, useRef } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -16,18 +23,22 @@ type ProductCardProps = {
 };
 
 function ProductCard({ product, ...rest }: ProductCardProps): JSX.Element {
-  const {
-    product_id: productId,
-    name,
-    photo,
-    description,
-    price,
-    currency,
-  } = product;
+  const { id, name, photo, description, price, currency } = product;
+  const buttonRef = useRef(null);
+  const dispatch = useAppDispatch();
+  const cartItems = useAppSelector(selectCartItems);
+  const totalQuantity = useAppSelector(selectCartTotalQuantity);
+  const totaPrice = useAppSelector(selectCartTotalPrice);
+
+  const addToCartHandler = useCallback(() => {
+    dispatch(addToCart(product, 1));
+  }, [dispatch, product]);
+
+  console.log(cartItems, totalQuantity, totaPrice);
 
   return (
     <EmptyCard {...rest}>
-      <Link href={`/products/${productId}`} passHref>
+      <Link href={`/products/${id}`} passHref>
         <Box>
           <Image
             width="255"
@@ -49,10 +60,14 @@ function ProductCard({ product, ...rest }: ProductCardProps): JSX.Element {
           justifyContent="space-between"
           alignItems="center">
           <Grid item>
-            <Typography component="p">{`${price} ${currency}`}</Typography>
+            <Typography component="p">{`${price.toFixed(
+              2
+            )} ${currency}`}</Typography>
           </Grid>
           <Grid item>
-            <Button>Add to cart</Button>
+            <Button ref={buttonRef} onClick={addToCartHandler}>
+              Add to cart
+            </Button>
           </Grid>
         </Grid>
       </Box>

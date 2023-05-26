@@ -19,7 +19,7 @@ export const getProductList = async (
     dataSource: "Cluster0",
     filter: {},
     projection: {
-      product_id: 1,
+      id: 1,
       photo: 1,
       name: 1,
       description: 1,

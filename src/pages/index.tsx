@@ -5,10 +5,10 @@ import Grid from "@mui/material/Grid";
 export default function HomePage(): JSX.Element {
   return (
     <Grid container>
-      <Grid item xs={12} sm={3} order={2}>
+      <Grid item xs={12} sm={3} mb="1rem">
         <Sidebar />
       </Grid>
-      <Grid item xs={12} sm={9} order={1} sx={{ xs: { margin: "1rem 0" } }}>
+      <Grid item xs={12} sm={9}>
         <ProductListBlock />
       </Grid>
     </Grid>

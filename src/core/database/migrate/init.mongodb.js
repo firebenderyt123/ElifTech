@@ -5,11 +5,24 @@ const database = "delivery";
 
 use(database);
 
+// shops
+const shops = [];
+
+for (let i = 1; i <= 10; i++) {
+  const shop = {
+    id: i,
+    name: `Shop ${i}`,
+  };
+  shops.push(shop);
+}
+db.shops.insertMany(shops);
+
+// products
 const products = [];
 
 for (let i = 1; i <= 50; i++) {
   const product = {
-    product_id: i,
+    id: i,
     photo: "",
     name: `Product ${i}`,
     description:
@@ -64,11 +77,11 @@ db.createCollection("orders", {
           description: "required array field 'products_list'",
           items: {
             bsonType: "object",
-            required: ["product_id", "count"],
+            required: ["id", "count"],
             properties: {
-              product_id: {
+              id: {
                 bsonType: "int",
-                description: "required int field 'product_id'",
+                description: "required int field 'id'",
               },
               count: {
                 bsonType: "int",

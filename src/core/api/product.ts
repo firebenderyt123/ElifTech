@@ -13,9 +13,9 @@ export const getProduct = async (productId: number): Promise<Product> => {
     collection: "products",
     database: "delivery",
     dataSource: "Cluster0",
-    filter: { product_id: productId },
+    filter: { id: productId },
     projection: {
-      product_id: 1,
+      id: 1,
       photo: 1,
       name: 1,
       price: 1,
