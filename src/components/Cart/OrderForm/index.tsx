@@ -1,81 +1,33 @@
 import React from "react";
-import { useForm, RegisterOptions } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { nameRules, emailRules, phoneRules, addressRules } from "./rules";
+import { OrderFormData } from "../../../core/types/OrderForm";
 
-type FormValues = {
-  address: string;
-  name: string;
-  email: string;
-  phone: string;
+type OrderFormType = {
+  // eslint-disable-next-line no-unused-vars
+  onSubmit: (formData: OrderFormData) => void;
 };
 
-const nameRules: RegisterOptions = {
-  required: "This field is required",
-  minLength: {
-    value: 2,
-    message: "Min length of name is 2 chars",
-  },
-  maxLength: {
-    value: 18,
-    message: "Max length of name is 18 chars",
-  },
-  pattern: {
-    value: /^[a-z\s]{2,18}$/i,
-    message: "Invalid name",
-  },
-};
-
-const emailRules: RegisterOptions = {
-  required: "This field is required",
-  pattern: {
-    value: /^[a-z0-9_]+@[a-z0-9]{2,11}.[a-z]{2,7}$/i,
-    message: "Invalid email",
-  },
-};
-
-const phoneRules: RegisterOptions = {
-  required: "This field is required",
-  pattern: {
-    value: /^[0-9]{9,10}$/i,
-    message: "Invalid phone",
-  },
-};
-
-const addressRules: RegisterOptions = {
-  required: "This field is required",
-  minLength: {
-    value: 10,
-    message: "Min length of address is 10 chars",
-  },
-  maxLength: {
-    value: 50,
-    message: "Max length of address is 50 chars",
-  },
-  pattern: {
-    value: /^[a-z0-9,-.\s/]{10,50}$/i,
-    message: "Invalid address",
-  },
-};
-
-function OrderForm() {
+function OrderForm({ onSubmit }: OrderFormType) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>();
+  } = useForm<OrderFormData>();
 
-  const onSubmit = (data: FormValues) => {
-    console.log(data);
+  const onSubmitHandler = (formData: OrderFormData) => {
+    onSubmit(formData);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmitHandler)}>
       <TextField
         label="Name"
         placeholder="John Doe"
         variant="outlined"
-        margin="normal"
+        margin="dense"
         fullWidth
         {...register("name", nameRules)}
         error={!!errors.name}
@@ -87,11 +39,11 @@ function OrderForm() {
         type="email"
         placeholder="delivery@shop.ua"
         variant="outlined"
-        margin="normal"
+        margin="dense"
         fullWidth
         {...register("email", emailRules)}
         error={!!errors.email}
-        helperText={errors?.email?.message || ""}
+        helperText={errors?.email?.message || " "}
       />
 
       <TextField
@@ -99,9 +51,9 @@ function OrderForm() {
         type="tel"
         placeholder="38 (099) 999-99-99"
         variant="outlined"
-        margin="normal"
+        margin="dense"
         fullWidth
-        {...register("email", phoneRules)}
+        {...register("phone", phoneRules)}
         error={!!errors.phone}
         helperText={errors?.phone?.message || " "}
       />
@@ -110,7 +62,7 @@ function OrderForm() {
         label="Address"
         placeholder="2025 M Street, NW, Washington, DC, 20036."
         variant="outlined"
-        margin="normal"
+        margin="dense"
         fullWidth
         {...register("address", addressRules)}
         error={!!errors.address}

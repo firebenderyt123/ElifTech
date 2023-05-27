@@ -4,9 +4,10 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   UPDATE_CART_ITEM,
+  CLEAR_CART,
 } from "../store/constants/cart";
 import { AppDispatch, RootState } from "../store";
-import { updateCartItemsLocal } from "../../utils/cart";
+import { updateCartItemsLocal, clearCartItemIds } from "../../utils/cart";
 
 export const addToCart = (product: Product, quantity: number) => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
@@ -38,5 +39,12 @@ export const updateCartItem = (product: Product, quantity: number) => {
     };
     dispatch({ type: UPDATE_CART_ITEM, item: item });
     updateCartItemsLocal(getState().cart.items);
+  };
+};
+
+export const clearCart = () => {
+  return async (dispatch: AppDispatch) => {
+    dispatch({ type: CLEAR_CART });
+    clearCartItemIds();
   };
 };

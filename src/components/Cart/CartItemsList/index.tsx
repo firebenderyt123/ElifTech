@@ -1,12 +1,29 @@
-import { removeFromCart, updateCartItem } from "../../../core/services/cart";
-import { selectCartItems } from "../../../core/store/selectors/cart";
-import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
+import React from "react";
+import Stack from "@mui/material/Stack";
+import CartItem from "../CartItem";
+import StyledBox from "../../StyledBox";
+import { CartItem as CartItemType } from "../../../core/types/CartItem";
 
-function CartItemsList(): JSX.Element {
-  const dispatch = useAppDispatch();
-  const cartItems = useAppSelector(selectCartItems);
-  console.log(cartItems);
-  return <></>;
+type CartItemsListProps = {
+  cartItems: CartItemType[];
+  totalPrice: number;
+  totalQuantity: number;
+};
+
+function CartItemsList({
+  cartItems,
+  totalPrice,
+  totalQuantity,
+}: CartItemsListProps): JSX.Element {
+  return (
+    <Stack spacing={2}>
+      {cartItems.map((cartItem: CartItemType) => (
+        <React.Fragment key={cartItem.product._id}>
+          <CartItem product={cartItem.product} />
+        </React.Fragment>
+      ))}
+    </Stack>
+  );
 }
 
 export default CartItemsList;

@@ -68,8 +68,8 @@ db.createCollection("orders", {
           description: "required string field 'address'",
         },
         total_price: {
-          bsonType: "decimal",
-          description: "required decimal field 'total_price'",
+          bsonType: "double",
+          description: "required double field 'total_price'",
         },
         total_products: {
           bsonType: "int",
@@ -80,15 +80,15 @@ db.createCollection("orders", {
           description: "required array field 'products_list'",
           items: {
             bsonType: "object",
-            required: ["id", "count"],
+            required: ["id", "quantity"],
             properties: {
               id: {
                 bsonType: "int",
                 description: "required int field 'id'",
               },
-              count: {
+              quantity: {
                 bsonType: "int",
-                description: "required int field 'count'",
+                description: "required int field 'quantity'",
               },
             },
           },

@@ -10,3 +10,8 @@ export type Product = {
   price: number;
   currency: string;
 };
+
+export type SmallProduct = {
+  id: number;
+  quantity: number;
+};

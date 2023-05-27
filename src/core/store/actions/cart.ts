@@ -2,6 +2,7 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   UPDATE_CART_ITEM,
+  CLEAR_CART,
 } from "../constants/cart";
 import { CartItem } from "../../types/CartItem";
 
@@ -20,10 +21,15 @@ interface UpdateCartItemAction {
   item: CartItem;
 }
 
+interface ClearCartAction {
+  type: typeof CLEAR_CART;
+}
+
 export type CartActions =
   | AddCartItemAction
   | RemoveCartItemAction
-  | UpdateCartItemAction;
+  | UpdateCartItemAction
+  | ClearCartAction;
 
 export const addCartItem = (item: CartItem): AddCartItemAction => ({
   type: ADD_TO_CART,
@@ -38,4 +44,8 @@ export const removeCartItem = (item: CartItem): RemoveCartItemAction => ({
 export const updateCartItem = (item: CartItem): UpdateCartItemAction => ({
   type: UPDATE_CART_ITEM,
   item,
+});
+
+export const clearCart = (): ClearCartAction => ({
+  type: CLEAR_CART,
 });

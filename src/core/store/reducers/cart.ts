@@ -2,6 +2,7 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   UPDATE_CART_ITEM,
+  CLEAR_CART,
 } from "../constants/cart";
 import { CartActions } from "../actions/cart";
 import { CartItem } from "../../types/CartItem";
@@ -109,6 +110,11 @@ export default function cartReducer(
         items: newItems,
         totalQuantity: newTotalQuantity,
         totalPrice: newTotalPrice,
+      };
+    }
+    case CLEAR_CART: {
+      return {
+        ...initialState,
       };
     }
     default:

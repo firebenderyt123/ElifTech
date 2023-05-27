@@ -1,9 +1,3 @@
-import EmptyCard from "./EmptyCard";
-import { Product } from "../../core/types/Product";
-import defaultImage from "../../assets/images/default.png";
-import { addToCart } from "../../core/services/cart";
-import { useAppDispatch } from "../../hooks/redux";
-
 import React, { useCallback } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -12,6 +6,11 @@ import Typography from "@mui/material/Typography";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Image from "next/image";
 import Link from "next/link";
+import EmptyCard from "./EmptyCard";
+import { Product } from "../../core/types/Product";
+import defaultImage from "../../assets/images/default.png";
+import { addToCart } from "../../core/services/cart";
+import { useAppDispatch } from "../../hooks/redux";
 
 interface ProductCardProps {
   product: Product;

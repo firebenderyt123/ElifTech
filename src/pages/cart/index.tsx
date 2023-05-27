@@ -1,5 +1,5 @@
-import OrderForm from "../../components/Cart/OrderForm";
+import CartContainer from "../../containers/Cart";
 
 export default function CartPage(): JSX.Element {
-  return <OrderForm />;
+  return <CartContainer />;
 }

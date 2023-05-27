@@ -1,9 +1,18 @@
 import { CartItem } from "../core/types/CartItem";
-import { Product } from "../core/types/Product";
+import { Product, SmallProduct } from "../core/types/Product";
 
 type CartItemsLocal = {
   id: number;
   quantity: number;
+};
+
+export const itemsToSmallProducts = (items: CartItem[]): SmallProduct[] => {
+  return items.map(
+    ({ product, quantity }: { product: Product; quantity: number }) => ({
+      id: product.id,
+      quantity,
+    })
+  );
 };
 
 export const getCartItemsLocal = (): CartItemsLocal[] => {
@@ -12,12 +21,7 @@ export const getCartItemsLocal = (): CartItemsLocal[] => {
 };
 
 export const updateCartItemsLocal = (items: CartItem[]) => {
-  const itemsToSave = items.map(
-    ({ product, quantity }: { product: Product; quantity: number }) => ({
-      id: product.id,
-      quantity,
-    })
-  );
+  const itemsToSave = itemsToSmallProducts(items);
   sessionStorage.setItem("cart", JSON.stringify(itemsToSave));
 };
 
