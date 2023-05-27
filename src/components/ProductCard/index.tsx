@@ -2,12 +2,7 @@ import EmptyCard from "./EmptyCard";
 import { Product } from "../../core/types/Product";
 import defaultImage from "../../assets/images/default.png";
 import { addToCart } from "../../core/services/cart";
-import {
-  selectCartItems,
-  selectCartTotalQuantity,
-  selectCartTotalPrice,
-} from "../../core/store/selectors/cart";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { useAppDispatch } from "../../hooks/redux";
 
 import React, { useCallback } from "react";
 import Box from "@mui/material/Box";
@@ -26,9 +21,6 @@ interface ProductCardProps {
 function ProductCard({ product, ...rest }: ProductCardProps): JSX.Element {
   const { id, name, shop, photo, description, price, currency } = product;
   const dispatch = useAppDispatch();
-  // const cartItems = useAppSelector(selectCartItems);
-  // const totalQuantity = useAppSelector(selectCartTotalQuantity);
-  // const totaPrice = useAppSelector(selectCartTotalPrice);
 
   const addToCartHandler = useCallback(() => {
     dispatch(addToCart(product, 1));

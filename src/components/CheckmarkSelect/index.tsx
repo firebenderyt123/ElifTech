@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -32,11 +32,7 @@ type CheckmarkSelectProps = {
   onClose?: (itemIds: number[]) => void;
 };
 
-export default function CheckmarkSelect({
-  label,
-  itemList,
-  onClose,
-}: CheckmarkSelectProps) {
+function CheckmarkSelect({ label, itemList, onClose }: CheckmarkSelectProps) {
   const [itemNames, setItemNames] = useState<string[]>([]);
   const [itemIds, setItemIds] = useState<number[]>([]);
 
@@ -88,3 +84,5 @@ export default function CheckmarkSelect({
     </div>
   );
 }
+
+export default React.memo(CheckmarkSelect);

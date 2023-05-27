@@ -1,5 +1,6 @@
 import HeaderBlock from "../containers/Header";
 import { store } from "../core/store";
+import { CartProvider } from "../contexts/CartContext";
 import lightTheme from "../core/themes/light";
 import { Provider } from "react-redux";
 import type { AppProps } from "next/app";
@@ -20,11 +21,13 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
     <CacheProvider value={muiCache}>
       <ThemeProvider theme={lightTheme}>
         <Provider store={store}>
-          <CssBaseline />
-          <HeaderBlock />
-          <Container>
-            <AnyComponent {...pageProps} />
-          </Container>
+          <CartProvider>
+            <CssBaseline />
+            <HeaderBlock />
+            <Container>
+              <AnyComponent {...pageProps} />
+            </Container>
+          </CartProvider>
         </Provider>
       </ThemeProvider>
     </CacheProvider>

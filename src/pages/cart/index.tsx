@@ -1,5 +1,5 @@
-import Grid from "@mui/material/Grid";
+import OrderForm from "../../components/Cart/OrderForm";
 
 export default function CartPage(): JSX.Element {
-  return <Grid container>Cart</Grid>;
+  return <OrderForm />;
 }

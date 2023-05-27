@@ -6,7 +6,7 @@ import {
   UPDATE_CART_ITEM,
 } from "../store/constants/cart";
 import { AppDispatch, RootState } from "../store";
-import { setCart } from "../../utils/cart";
+import { updateCartItemsLocal } from "../../utils/cart";
 
 export const addToCart = (product: Product, quantity: number) => {
   return async (dispatch: AppDispatch, getState: () => RootState) => {
@@ -15,7 +15,7 @@ export const addToCart = (product: Product, quantity: number) => {
       quantity,
     };
     dispatch({ type: ADD_TO_CART, item: item });
-    setCart(getState().cart.items);
+    updateCartItemsLocal(getState().cart.items);
   };
 };
 
@@ -26,7 +26,7 @@ export const removeFromCart = (product: Product, quantity: number) => {
       quantity,
     };
     dispatch({ type: REMOVE_FROM_CART, item: item });
-    setCart(getState().cart.items);
+    updateCartItemsLocal(getState().cart.items);
   };
 };
 
@@ -37,6 +37,6 @@ export const updateCartItem = (product: Product, quantity: number) => {
       quantity,
     };
     dispatch({ type: UPDATE_CART_ITEM, item: item });
-    setCart(getState().cart.items);
+    updateCartItemsLocal(getState().cart.items);
   };
 };

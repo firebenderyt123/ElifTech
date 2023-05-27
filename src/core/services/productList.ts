@@ -11,10 +11,11 @@ type GetProductList = {
   limit: number;
   page: number;
   shopIds?: number[];
+  productIds?: number[];
 };
 
 export const getProductList = ({
-  limit = 20,
+  limit = 10,
   page = 1,
   shopIds,
 }: GetProductList) => {
@@ -22,11 +23,11 @@ export const getProductList = ({
     dispatch({ type: GET_PRODUCT_LIST_REQUEST });
 
     try {
-      const productList: ProductList = await fetchProductList(
+      const productList: ProductList = await fetchProductList({
         limit,
         page,
-        shopIds
-      );
+        shopIds,
+      });
       dispatch({ type: GET_PRODUCT_LIST_SUCCESS, productList });
     } catch (error: any) {
       dispatch({
