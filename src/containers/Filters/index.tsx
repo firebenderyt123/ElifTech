@@ -15,7 +15,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
-export default function Sidebar(): JSX.Element {
+export default function Filters(): JSX.Element {
   const dispatch = useAppDispatch();
   const shopList = useAppSelector(selectShopList);
   const isLoading = useAppSelector(selectShopListIsLoading);

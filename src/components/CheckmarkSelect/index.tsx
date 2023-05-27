@@ -67,7 +67,7 @@ export default function CheckmarkSelect({
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: "300px", maxWidth: "100%" }}>
+      <FormControl sx={{ width: "300px", maxWidth: "100%" }}>
         <InputLabel>{label}</InputLabel>
         <Select
           multiple
