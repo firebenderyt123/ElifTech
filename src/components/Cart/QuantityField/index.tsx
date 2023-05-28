@@ -24,7 +24,7 @@ function QuantityField({
 
   const subQuantityHandler = useCallback(() => {
     setQuantity((prev) => (prev > MIN_QUANTITY ? --prev : prev));
-    onChange && onChange(quantity - 1);
+    if (quantity > MIN_QUANTITY) onChange && onChange(quantity - 1);
   }, [onChange, quantity]);
 
   const quantityChangeHandler = useCallback(
@@ -40,7 +40,7 @@ function QuantityField({
 
   const addQuantityHandler = useCallback(() => {
     setQuantity((prev) => (prev < MAX_QUANTITY ? ++prev : prev));
-    onChange && onChange(quantity + 1);
+    if (quantity < MAX_QUANTITY) onChange && onChange(quantity + 1);
   }, [onChange, quantity]);
 
   return (

@@ -8,17 +8,18 @@ function EmptyCard({ children, ...rest }: BoxProps): JSX.Element {
       boxShadow="0px 0px 20px 0px #00000010"
       sx={{
         backgroundColor: "background.secondary",
-        maxWidth: "15.625rem",
         position: "relative",
+        width: { xs: "100%", md: "15.625rem" },
         "& img": {
           cursor: "pointer",
           overflow: "hidden",
+          objectFit: "cover",
+          width: "100%",
           transition: "transform 0.2s ease-in-out",
         },
         "& img:hover": {
           transform: "scale(1.5) rotate(-15deg)",
         },
-        sm: { maxWidth: "18.75rem" },
       }}
       {...rest}>
       {children}

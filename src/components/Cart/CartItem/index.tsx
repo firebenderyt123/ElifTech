@@ -45,7 +45,7 @@ function CartItem({ cartItem, onChange, ...rest }: CartItemProps): JSX.Element {
         alignItems="center"
         justifyContent="space-between"
         spacing="1rem">
-        <Grid item xs={4}>
+        <Grid item xs={4} sx={{ "& > img": { width: "100%", height: "auto" } }}>
           <Image
             width="255"
             height="150"

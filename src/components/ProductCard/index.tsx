@@ -28,7 +28,12 @@ function ProductCard({ product, ...rest }: ProductCardProps): JSX.Element {
   return (
     <EmptyCard {...rest}>
       <Link href={`/products/${id}`} passHref>
-        <Box>
+        <Box
+          sx={{
+            overflow: "hidden",
+            borderRadius: "10px 10px 0 0",
+            height: "300px",
+          }}>
           <Image
             width="255"
             height="300"
