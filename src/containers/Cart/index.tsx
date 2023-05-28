@@ -15,12 +15,14 @@ import {
   selectCartTotalQuantity,
 } from "../../core/store/selectors/cart";
 import { selectMakeOrderSuccess } from "../../core/store/selectors/makeOrder";
+import { updateCartItem } from "../../core/services/cart";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import {
   OrderForm as OrderFormType,
   OrderFormData,
 } from "../../core/types/OrderForm";
 import { itemsToSmallProducts } from "../../utils/cart";
+import { Typography } from "@mui/material";
 
 function CartContainer(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -28,6 +30,13 @@ function CartContainer(): JSX.Element {
   const totalPrice = useAppSelector(selectCartTotalPrice);
   const totalQuantity = useAppSelector(selectCartTotalQuantity);
   const isOrderSuccess = useAppSelector(selectMakeOrderSuccess);
+
+  const onItemChangeHandler = useCallback(
+    (product, quantity) => {
+      dispatch(updateCartItem(product, quantity));
+    },
+    [dispatch]
+  );
 
   const makeOrderHandler = useCallback(
     (formData: OrderFormData) => {
@@ -75,11 +84,13 @@ function CartContainer(): JSX.Element {
           maxHeight: { xs: "192px", md: "495px" },
           order: { xs: 1, md: 2 },
         }}>
-        <CartItemsList
-          cartItems={cartItems}
-          totalPrice={totalPrice}
-          totalQuantity={totalQuantity}
-        />
+        <CartItemsList cartItems={cartItems} onChange={onItemChangeHandler} />
+      </Grid>
+      <Grid item xs={12} display="flex" justifyContent="flex-end" order={3}>
+        <StyledBox width="300px">
+          <Typography>Total products: {totalQuantity}</Typography>
+          <Typography>Total price: {totalPrice.toFixed(2)} USD</Typography>
+        </StyledBox>
       </Grid>
     </Grid>
   );

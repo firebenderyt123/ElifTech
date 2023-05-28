@@ -1,25 +1,34 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Stack from "@mui/material/Stack";
 import CartItem from "../CartItem";
-import StyledBox from "../../StyledBox";
 import { CartItem as CartItemType } from "../../../core/types/CartItem";
+import { Product } from "../../../core/types/Product";
 
 type CartItemsListProps = {
   cartItems: CartItemType[];
-  totalPrice: number;
-  totalQuantity: number;
+  // eslint-disable-next-line no-unused-vars
+  onChange?: (product: Product, quantity: number) => void;
 };
 
 function CartItemsList({
   cartItems,
-  totalPrice,
-  totalQuantity,
+  onChange,
 }: CartItemsListProps): JSX.Element {
+  const onChangeHandler = useCallback(
+    (cartItem: CartItemType, quantity: number) => {
+      onChange && onChange(cartItem.product, quantity);
+    },
+    [onChange]
+  );
+
   return (
     <Stack spacing={2}>
       {cartItems.map((cartItem: CartItemType) => (
         <React.Fragment key={cartItem.product._id}>
-          <CartItem product={cartItem.product} />
+          <CartItem
+            cartItem={cartItem}
+            onChange={(quantity) => onChangeHandler(cartItem, quantity)}
+          />
         </React.Fragment>
       ))}
     </Stack>
