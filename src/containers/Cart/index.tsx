@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import {
   CartItemsList,
   CartPageMessage,
@@ -21,8 +22,8 @@ import {
   OrderForm as OrderFormType,
   OrderFormData,
 } from "../../core/types/OrderForm";
+import { Product } from "../../core/types/Product";
 import { itemsToSmallProducts } from "../../utils/cart";
-import { Typography } from "@mui/material";
 
 function CartContainer(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -32,7 +33,7 @@ function CartContainer(): JSX.Element {
   const isOrderSuccess = useAppSelector(selectMakeOrderSuccess);
 
   const onItemChangeHandler = useCallback(
-    (product, quantity) => {
+    (product: Product, quantity: number) => {
       dispatch(updateCartItem(product, quantity));
     },
     [dispatch]

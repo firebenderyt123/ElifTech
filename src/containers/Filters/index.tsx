@@ -26,7 +26,7 @@ export default function Filters(): JSX.Element {
   }, [dispatch]);
 
   const shopOnClickHandler = useCallback(
-    (shopIds) => {
+    (shopIds: number[]) => {
       dispatch(getProductList({ limit: 12, page: 1, shopIds: shopIds }));
     },
     [dispatch]
