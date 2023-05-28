@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { getProductsByIds } from "../core/api/productsById";
 import { Product } from "../core/types/Product";
 import { addToCart } from "../core/services/cart";
-import { selectCartItems } from "../core/store/selectors/cart";
+import { selectCartTotalQuantity } from "../core/store/selectors/cart";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { getCartItemsLocal } from "../utils/cart";
 
@@ -14,7 +14,7 @@ type CartProviderProps = {
 
 export const CartProvider = ({ children }: CartProviderProps): JSX.Element => {
   const dispatch = useAppDispatch();
-  const cartItems = useAppSelector(selectCartItems);
+  const totalQuantity = useAppSelector(selectCartTotalQuantity);
   const [isGotParams, setIsGotParams] = useState<boolean>(false);
 
   // getting cart from localStorage
@@ -39,7 +39,7 @@ export const CartProvider = ({ children }: CartProviderProps): JSX.Element => {
   }, [dispatch, isGotParams]);
 
   const value = {
-    cartItems,
+    totalQuantity,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

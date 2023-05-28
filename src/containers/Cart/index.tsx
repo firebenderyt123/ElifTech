@@ -40,7 +40,7 @@ function CartContainer(): JSX.Element {
 
   const makeOrderHandler = useCallback(
     (formData: OrderFormData) => {
-      if (totalPrice > 0) {
+      if (cartItems.length > 0) {
         const order: OrderFormType = {
           ...formData,
           total_price: totalPrice,
@@ -59,10 +59,10 @@ function CartContainer(): JSX.Element {
     }
   }, [dispatch, isOrderSuccess]);
 
-  const emptyCartMessage = !isOrderSuccess && totalPrice == 0 && (
+  const emptyCartMessage = !isOrderSuccess && cartItems.length == 0 && (
     <CartPageMessage message="Oops.. Your cart is empty!" />
   );
-  const orderForm = totalPrice > 0 && (
+  const orderForm = cartItems.length > 0 && (
     <Grid container columnSpacing="1rem" justifyContent="center">
       <Grid
         item

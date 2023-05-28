@@ -1,10 +1,14 @@
-import StyledBox from "../../components/StyledBox";
-import Container from "@mui/material/Container";
+import Badge from "@mui/material/Badge";
 import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import StyledBox from "../../components/StyledBox";
+import { useCart } from "../../hooks/useCart";
 
 export default function HeaderBlock(): JSX.Element {
+  const { totalQuantity } = useCart();
   return (
     <StyledBox
       borderRadius={0}
@@ -18,9 +22,14 @@ export default function HeaderBlock(): JSX.Element {
             <Button href="/">Shop</Button>
           </Grid>
           <Grid item>
-            <Button href="/cart">
-              <ShoppingCartOutlinedIcon />
-            </Button>
+            <IconButton
+              href="/cart"
+              aria-label="show 4 new mails"
+              color="inherit">
+              <Badge badgeContent={totalQuantity} color="error">
+                <ShoppingCartOutlinedIcon />
+              </Badge>
+            </IconButton>
           </Grid>
         </Grid>
       </Container>
